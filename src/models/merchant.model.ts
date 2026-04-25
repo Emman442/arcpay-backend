@@ -8,6 +8,7 @@ export interface IMerchantDocument extends Document {
   walletAddress: string
   apiKey: string
   webhookUrl?: string
+  verified?: boolean
   createdAt: Date
   updatedAt: Date
   comparePassword(candidate: string): Promise<boolean>
@@ -21,6 +22,7 @@ const MerchantSchema = new Schema<IMerchantDocument>(
     walletAddress: { type: String, required: true, trim: true },
     apiKey: { type: String, required: true, unique: true },
     webhookUrl: { type: String, default: null },
+    verified: {type: Boolean, default: false}
   },
   { timestamps: true }
 )

@@ -31,10 +31,11 @@ export function watchForPayment(
   orderId: string,
   expectedAmount: string
 ): () => void {
+  const usdcContract = process.env.USDC_CONTRACT_ADDRESS as `0x${string}`
   console.log(`[ArcService] Watching — Order: ${orderId}, Wallet: ${merchantWallet}`)
 
   const unwatch = arcClient.watchContractEvent({
-    address: USDC_CONTRACT,
+    address: usdcContract,
     abi: ERC20_ABI,
     eventName: 'Transfer',
     args: { to: merchantWallet as `0x${string}` },

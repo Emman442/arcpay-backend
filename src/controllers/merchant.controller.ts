@@ -110,6 +110,7 @@ export async function loginMerchant(req: Request, res: Response): Promise<void> 
         name: merchant.name,
         email: merchant.email,
         walletAddress: merchant.walletAddress,
+        verified: merchant.verified
       },
     })
   } catch (err) {

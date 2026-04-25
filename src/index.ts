@@ -17,10 +17,18 @@ dotenv.config();
 const app = express();
 const PORT = 5000;
 const DB_URL = `mongodb+srv://${process.env.DB_USER}:${process.env.DB_PASS}@cluster0.yrqq1im.mongodb.net/stakeForge?retryWrites=true&w=majority`
-app.use(cors());
+
 app.use(express.json());
 app.use(helmet())
-app.use(cors({ origin: process.env.FRONTEND_URL || '*' }))
+app.use(cors({
+  origin: [
+    'https://arc-pay-eosin.vercel.app',   // no trailing slash
+    'http://localhost:3000',               // for local dev
+  ],
+  methods: ['GET', 'POST', 'PATCH', 'PUT', 'DELETE', 'OPTIONS'],
+  allowedHeaders: ['Content-Type', 'Authorization'],
+  credentials: true,
+}))
 
 app.get('/health', (_, res) => res.json({ status: 'ok', timestamp: new Date().toISOString() }))
 
